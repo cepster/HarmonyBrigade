@@ -1,0 +1,17 @@
+version: "3"
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "4200:80"
+    container_name: "roster-demo-ui"
+
+  server:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    ports:
+      - "9000:9000"
+    container_name: "roster-demo-server"
