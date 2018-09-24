@@ -1,5 +1,17 @@
 # RosterDemo
 
+This is the set of project files from a DevU on 8/19/18 - it demonstrates how to build up a fully functional web application from scratch using Angular, Express, and Docker.
+
+Angular Code: /src directory
+
+Server Code: /server directory
+
+Dockerfile: ./Dockerfile
+
+Docker Compose Definition: ./docker-compose.yml
+
+---
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
 
 ## Development server
