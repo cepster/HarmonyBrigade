@@ -1,0 +1,31 @@
+<div class="content">
+  <div class="grid">
+    <div class="grid__row">
+      <div class="grid__col--large-4">
+        <div class="card">
+          <kendo-grid [data]="people" [height]="410">
+            <kendo-grid-column field="name" title="Name" width="250">
+            </kendo-grid-column>
+            <kendo-grid-column title="Part" width="100">
+              <ng-template kendoGrillCellTemplate let-dataItem>
+                <kendo-dropdownlist [data]="['Lead', 'Tenor', 'Bari', 'Bass']">
+                </kendo-dropdownlist>
+              </ng-template>
+            </kendo-grid-column>
+            <kendo-grid-column field="noShow" title="No Show" width="80">
+              <ng-template kendoGridCellTemplate let-dataItem>
+                <input type="checkbox" [checked]="dataItem.noShow" />
+              </ng-template>
+            </kendo-grid-column>
+          </kendo-grid>
+          <div class="card__action-bar">
+            <div class="button-group">
+              <button class="button button--primary">Save</button>
+              <button class="button">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

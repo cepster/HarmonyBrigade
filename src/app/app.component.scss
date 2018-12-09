@@ -1,0 +1,48 @@
+@import "~@campus/elements/scss/core/config";
+@import "~@campus/elements/scss/core/mixins";
+@import "~@campus/elements/css/global.css";
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  background: darkred;
+  height: 80px;
+  padding: 0 20px 0 20px;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 70px;
+  }
+}
+
+.list__group {
+  margin: auto 25px auto 25px;
+  color: $white;
+  font-size: 1.2em;
+}
+
+.header__spacer {
+  border-left: 1px solid $white;
+  margin: 10px 20px 10px 35px;
+}
+
+.mobile__menu {
+  font-size: 21px;
+  margin-left: auto;
+}
+
+.workspace {
+  overflow-y: scroll;
+  margin-top: 80px;
+}
+
+.grid {
+  max-width: initial;
+  padding: 20px;
+}
