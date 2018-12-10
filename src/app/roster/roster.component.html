@@ -1,31 +1,72 @@
-<div class="content">
-  <div class="grid">
-    <div class="grid__row">
-      <div class="grid__col--large-4">
-        <div class="card">
-          <kendo-grid [data]="people" [height]="410">
-            <kendo-grid-column field="name" title="Name" width="250">
-            </kendo-grid-column>
-            <kendo-grid-column title="Part" width="100">
-              <ng-template kendoGrillCellTemplate let-dataItem>
-                <kendo-dropdownlist [data]="['Lead', 'Tenor', 'Bari', 'Bass']">
-                </kendo-dropdownlist>
-              </ng-template>
-            </kendo-grid-column>
-            <kendo-grid-column field="noShow" title="No Show" width="80">
-              <ng-template kendoGridCellTemplate let-dataItem>
-                <input type="checkbox" [checked]="dataItem.noShow" />
-              </ng-template>
-            </kendo-grid-column>
-          </kendo-grid>
-          <div class="card__action-bar">
-            <div class="button-group">
-              <button class="button button--primary">Save</button>
-              <button class="button">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<mat-card>
+  <mat-card-title>2019 Roster</mat-card-title>
+  <mat-table #table matSort [dataSource]="dataSource">
+    <!-- Remove Column -->
+    <ng-container matColumnDef="remove">
+      <mat-header-cell *matHeaderCellDef>Remove</mat-header-cell>
+      <mat-cell *matCellDef="let person">
+        <button mat-button (click)="removePerson(person)">Remove</button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Name
+      </mat-header-cell>
+      <mat-cell *matCellDef="let person">
+        <mat-form-field floatLabel="never">
+          <input
+            matInput
+            placeholder="Name"
+            [value]="person.name"
+            [(ngModel)]="person.name"
+            (ngModelChange)="change(people)"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Part Column -->
+    <ng-container matColumnDef="part">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        Part
+      </mat-header-cell>
+      <mat-cell *matCellDef="let person">
+        <mat-form-field floatLabel="never">
+          <mat-select
+            [(ngModel)]="person.part"
+            [(value)]="person.part"
+            placeholder="Part"
+            (ngModelChange)="change(people)"
+          >
+            <mat-option></mat-option>
+            <mat-option *ngFor="let role of roles" value="{{role}}">{{
+              role
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="noShow">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>
+        No Show</mat-header-cell
+      >
+      <mat-cell *matCellDef="let person">
+        <!-- <mat-form-field floatPlaceholder="always"> -->
+        <mat-checkbox
+          [(ngModel)]="person.noShow"
+          [checked]="person.noShow"
+          (ngModelChange)="change(people)"
+        ></mat-checkbox>
+        <!-- </mat-form-field> -->
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+
+  <button mat-button (click)="addPerson()">Add</button>
+</mat-card>

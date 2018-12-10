@@ -1,15 +1,13 @@
-@import "~@campus/elements/scss/core/config";
-@import "~@campus/elements/scss/core/mixins";
-@import "~@campus/elements/css/global.css";
-
 header {
   position: fixed;
   top: 0;
   width: 100%;
   display: flex;
-  background: darkred;
+  background: #ffd740;
   height: 80px;
   padding: 0 20px 0 20px;
+  color: rgba(0, 0, 0, 0.87);
+  margin-left: -8px;
 }
 
 .header__logo {
@@ -23,12 +21,19 @@ header {
 
 .list__group {
   margin: auto 25px auto 25px;
-  color: $white;
+  color: black;
   font-size: 1.2em;
+  text-decoration: none;
+  transition: 0.3s;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .header__spacer {
-  border-left: 1px solid $white;
+  border-left: 1px solid black;
   margin: 10px 20px 10px 35px;
 }
 

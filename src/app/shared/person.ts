@@ -1,7 +1,7 @@
 export class Person {
   constructor(
-    public name: string,
-    public part: string,
-    public noShow: boolean
+    public name?: string,
+    public part?: string,
+    public noShow?: boolean
   ) {}
 }
