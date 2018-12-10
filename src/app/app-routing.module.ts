@@ -10,12 +10,27 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatTableModule } from "@angular/material/table";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouterModule, Routes } from "@angular/router";
+import { HomeComponent } from "./home/home.component";
+import { RandomizerComponent } from "./randomizer/randomizer.component";
 import { RosterComponent } from "./roster/roster.component";
+import { ScoringComponent } from "./scoring/scoring.component";
 
 const routes: Routes = [
   {
+    path: "home",
+    component: HomeComponent
+  },
+  {
     path: "roster",
     component: RosterComponent
+  },
+  {
+    path: "randomizer",
+    component: RandomizerComponent
+  },
+  {
+    path: "scoring",
+    component: ScoringComponent
   }
 ];
 
@@ -35,6 +50,6 @@ const routes: Routes = [
     MatSortModule
   ],
   exports: [RouterModule],
-  declarations: [RosterComponent]
+  declarations: [RosterComponent, RandomizerComponent, ScoringComponent]
 })
 export class AppRoutingModule {}

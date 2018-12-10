@@ -1,10 +1,10 @@
-import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
 import { without } from "lodash";
 import { debounceTime } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
 import { success } from "toastr";
+import { DataService } from "../data.service";
 import { Person } from "../shared/person";
 
 @Component({
@@ -20,22 +20,16 @@ export class RosterComponent implements OnInit {
 
   public roles = ["Bari", "Bass", "Lead", "Tenor"];
 
-  constructor(private http: HttpClient) {}
+  constructor(private data: DataService) {}
 
-  ngOnInit() {
-    this.http
-      .get("http://localhost:9000/roster")
-      .subscribe((people: Person[]) => {
-        this.people = people;
-        this.dataSource = new MatTableDataSource(this.people);
-      });
+  public async ngOnInit() {
+    this.people = await this.data.getRoster();
+    this.dataSource = new MatTableDataSource(this.people);
 
     this.modelChanged.pipe(debounceTime(3000)).subscribe(model => {
-      this.http
-        .post("http://localhost:9000/roster", this.people)
-        .subscribe(() => {
-          success("Changes Saved");
-        });
+      this.data.updateRoster(this.people).subscribe(() => {
+        success("Changes Saved");
+      });
     });
   }
 

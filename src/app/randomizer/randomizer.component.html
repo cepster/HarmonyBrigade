@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-title>2019 Quartets</mat-card-title>
+  <button mat-stroked-button (click)="randomize()">Randomize Quartets</button>
+  <mat-table #table matSort [dataSource]="dataSource">
+    <ng-container matColumnDef="lead">
+      <mat-header-cell *matHeaderCellDef>Lead</mat-header-cell>
+      <mat-cell *matCellDef="let quartet"> {{ quartet.lead.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bass">
+      <mat-header-cell *matHeaderCellDef>Bass</mat-header-cell>
+      <mat-cell *matCellDef="let quartet"> {{ quartet.bass.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="bari">
+      <mat-header-cell *matHeaderCellDef>Bari</mat-header-cell>
+      <mat-cell *matCellDef="let quartet"> {{ quartet.bari.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tenor">
+      <mat-header-cell *matHeaderCellDef>Tenor</mat-header-cell>
+      <mat-cell *matCellDef="let quartet"> {{ quartet.tenor.name }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        <mat-form-field floatLabel="never">
+          <input
+            matInput
+            placeholder="Quartet Name"
+            [value]="quartet.name"
+            [(ngModel)]="quartet.name"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+</mat-card>

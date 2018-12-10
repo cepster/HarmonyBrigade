@@ -68,5 +68,11 @@
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
 
-  <button mat-button (click)="addPerson()">Add</button>
+  <button
+    mat-mini-fab
+    (click)="addPerson()"
+    style="font-size:2em; margin-top: 20px; color: white;"
+  >
+    +
+  </button>
 </mat-card>

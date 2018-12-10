@@ -1,15 +1,39 @@
 <header>
   <div class="header__logo">
-    <img src="http://home.harmonybrigade.org/uploads/5/6/9/8/5698499/published/xq-on-white-with-tm_8.jpg">
+    <img
+      src="http://home.harmonybrigade.org/uploads/5/6/9/8/5698499/published/xq-on-white-with-tm_8.jpg"
+    />
   </div>
   <div class="header__spacer"></div>
-  <a class="list__group hide-tiny hide-small" routerLink="/home" routerLinkActive="active__link">Home</a>
-  <a class="list__group hide-tiny hide-small" routerLink="/roster" routerLinkActive="active__link">Roster</a>
-  <!-- <a class="list__group mobile__menu hide-until-small" (click)="menuClicked.emit()">
-    <div class="fa fa-bars"></div>
-  </a> -->
+  <a
+    class="list__group hide-tiny hide-small"
+    routerLink="/home"
+    routerLinkActive="active__link"
+    >Home</a
+  >
+  <a
+    class="list__group hide-tiny hide-small"
+    routerLink="/roster"
+    routerLinkActive="active__link"
+    >Roster</a
+  >
+  <a
+    class="list__group"
+    routerLink="/randomizer"
+    routerLinkActive="active__link"
+    >Randomizer</a
+  >
+  <a
+    class="list__group hide-tiny hide-small"
+    routerLink="/scoring"
+    routerLinkActive="active__link"
+    >Scoring</a
+  >
+  <!--
+    <a class="list__group mobile__menu hide-until-small" (click)="menuClicked.emit()">
+      <div class="fa fa-bars"></div>
+    </a>
+  -->
 </header>
 
-<div class="workspace">
-  <router-outlet></router-outlet>
-</div>
+<div class="workspace"><router-outlet></router-outlet></div>
