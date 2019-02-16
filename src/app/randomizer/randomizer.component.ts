@@ -1,23 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
-import { clone, filter, sample, without } from "lodash";
+import { Router } from "@angular/router";
+import { clone, filter, find, sample, without } from "lodash";
+import { error, success } from "toastr";
 import { DataService } from "../data.service";
 import { Person } from "../shared/person";
-
-class Quartet {
-  public lead: Person;
-  public bass: Person;
-  public bari: Person;
-  public tenor: Person;
-  public name: string;
-
-  constructor(l: Person, bs: Person, br: Person, t: Person) {
-    this.lead = l;
-    this.bass = bs;
-    this.bari = br;
-    this.tenor = t;
-  }
-}
+import { Quartet } from "../shared/quartet";
 
 @Component({
   selector: "app-randomizer",
@@ -29,7 +17,7 @@ export class RandomizerComponent implements OnInit {
   public dataSource: MatTableDataSource<Quartet>;
   public displayedColumns = ["lead", "bass", "bari", "tenor", "name"];
 
-  constructor(private data: DataService) {}
+  constructor(private data: DataService, private router: Router) {}
 
   ngOnInit() {}
 
@@ -84,6 +72,35 @@ export class RandomizerComponent implements OnInit {
       this.quartets.push(new Quartet(lead, bass, bari, tenor));
     }
 
+    console.log(this.quartets);
     this.dataSource = new MatTableDataSource(this.quartets);
+  }
+
+  public save(): void {
+    if (this.quartetWithNoName()) {
+      error("Please supply a name for all quartets");
+      return;
+    }
+
+    this.data.updateQuartets(this.quartets).subscribe(() => {
+      success("Saved");
+    });
+  }
+
+  public submit() {
+    if (this.quartetWithNoName()) {
+      error("Please supply a name for all quartets");
+      return;
+    }
+
+    this.data.updateQuartets(this.quartets).subscribe(() => {
+      this.router.navigate(["scoring"]);
+    });
+  }
+
+  private quartetWithNoName(): Quartet {
+    return find(this.quartets, (quartet: Quartet) => {
+      return !quartet.name;
+    });
   }
 }

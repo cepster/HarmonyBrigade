@@ -39,4 +39,20 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
+  <button
+    mat-stroked-button
+    (click)="save()"
+    style="margin-top:10px;"
+    *ngIf="quartets.length > 0"
+  >
+    Save
+  </button>
+  <button
+    mat-stroked-button
+    (click)="submit()"
+    style="margin-top:10px;"
+    *ngIf="quartets.length > 0"
+  >
+    Submit to Scoring
+  </button>
 </mat-card>

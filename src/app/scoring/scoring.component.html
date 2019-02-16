@@ -1,3 +1,85 @@
-<p>
-  scoring works!
-</p>
+<mat-card>
+  <mat-card-title>Scoring</mat-card-title>
+  <button mat-stroked-button (click)="load()">Load From Randomizer</button>
+  <mat-table #table matSort [dataSource]="dataSource">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        {{ quartet.quartet.name }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="score1">
+      <mat-header-cell *matHeaderCellDef>Score 1</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        <mat-form-field floatLabel="never">
+          <input
+            type="number"
+            matInput
+            placeholder="Score 1"
+            [value]="quartet.score1"
+            [(ngModel)]="quartet.score1"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="score2">
+      <mat-header-cell *matHeaderCellDef>Score 2</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        <mat-form-field floatLabel="never">
+          <input
+            type="number"
+            matInput
+            placeholder="Score 2"
+            [value]="quartet.score2"
+            [(ngModel)]="quartet.score2"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="score3">
+      <mat-header-cell *matHeaderCellDef>Score 3</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        <mat-form-field floatLabel="never">
+          <input
+            type="number"
+            matInput
+            placeholder="Score 3"
+            [value]="quartet.score3"
+            [(ngModel)]="quartet.score3"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="score4">
+      <mat-header-cell *matHeaderCellDef>Score 4</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        <mat-form-field floatLabel="never">
+          <input
+            type="number"
+            matInput
+            placeholder="Score 4"
+            [value]="quartet.score4"
+            [(ngModel)]="quartet.score4"
+          />
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="totalScore">
+      <mat-header-cell *matHeaderCellDef>Total Score</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        {{ quartet.getTotalScore() }}
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <button mat-stroked-button (click)="save()" style="margin-top:10px;">
+    Save
+  </button>
+</mat-card>
