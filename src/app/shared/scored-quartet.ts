@@ -6,13 +6,22 @@ export class ScoredQuartet {
   public score2: number;
   public score3: number;
   public score4: number;
+  public isWc: boolean;
 
-  constructor(q: Quartet, s1?: number, s2?: number, s3?: number, s4?: number) {
+  constructor(
+    q: Quartet,
+    s1?: number,
+    s2?: number,
+    s3?: number,
+    s4?: number,
+    isWc?: boolean
+  ) {
     this.quartet = q;
     this.score1 = s1;
     this.score2 = s2;
     this.score3 = s3;
     this.score4 = s4;
+    this.isWc = isWc;
   }
 
   public getTotalScore(): any {

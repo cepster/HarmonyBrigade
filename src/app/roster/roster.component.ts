@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatTableDataSource } from "@angular/material";
-import { without } from "lodash";
+import * as _ from "lodash";
 import { debounceTime } from "rxjs/operators";
 import { Subject } from "rxjs/Subject";
 import { success } from "toastr";
@@ -23,18 +23,20 @@ export class RosterComponent implements OnInit {
   constructor(private data: DataService) {}
 
   public async ngOnInit() {
-    this.people = await this.data.getRoster();
-    this.dataSource = new MatTableDataSource(this.people);
+    this.data.getRoster().subscribe((people: Person[]) => {
+      this.people = people;
+      this.dataSource = new MatTableDataSource(this.people);
 
-    this.modelChanged.pipe(debounceTime(3000)).subscribe(model => {
-      this.data.updateRoster(this.people).subscribe(() => {
-        success("Changes Saved");
+      this.modelChanged.pipe(debounceTime(2000)).subscribe(model => {
+        this.data.updateRoster(this.people).subscribe(() => {
+          success("Changes Saved");
+        });
       });
     });
   }
 
   public removePerson(person: Person) {
-    this.people = without(this.people, person);
+    this.people = _.without(this.people, person);
     this.dataSource = new MatTableDataSource(this.people);
     this.modelChanged.next(this.people);
   }
@@ -46,5 +48,15 @@ export class RosterComponent implements OnInit {
 
   public change() {
     this.modelChanged.next(this.people);
+  }
+
+  public competingPeople(): Person[] {
+    return _.filter(this.people, (p: Person) => {
+      return !p.noShow;
+    });
+  }
+
+  public partCount(part: string): number {
+    return _.filter(this.competingPeople(), { part: part }).length;
   }
 }

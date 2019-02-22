@@ -146,6 +146,51 @@ app.post("/quartetScores", cors(corsOptions), (req, res) => {
   });
 });
 
+app.get("/quartetFinals", cors(corsOptions), (req, res) => {
+  mongo.connect(dbUrl, (err, client) => {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+
+    client
+      .db()
+      .collection("quartetFinals")
+      .find()
+      .toArray((queryErr, result) => {
+        if (queryErr) {
+          res.status(500).send(queryErr);
+          return;
+        }
+
+        res.status(200).send(result);
+      });
+  });
+});
+
+app.options("/quartetFinals", cors());
+app.post("/quartetFinals", cors(corsOptions), (req, res) => {
+  mongo.connect(dbUrl, (err, client) => {
+    if (err) {
+      res.status(500).send(err);
+      return;
+    }
+
+    client
+      .db()
+      .collection("quartetFinals")
+      .remove();
+
+    client
+      .db()
+      .collection("quartetFinals")
+      .insertMany(req.body, () => {
+        res.status(200).send();
+        client.close();
+      });
+  });
+});
+
 app.listen(9000, () => {
   console.log("App is listening on port 9000");
 });

@@ -1,6 +1,5 @@
 <mat-card>
-  <mat-card-title>Scoring</mat-card-title>
-  <button mat-stroked-button (click)="load()">Load From Randomizer</button>
+  <mat-card-title>Finals</mat-card-title>
   <mat-table #table matSort [dataSource]="dataSource">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
@@ -21,7 +20,7 @@
           {{ quartet.quartet.name }}
         </span>
         <span style="font-style: italic; margin-left: 10px;">
-          ({{ quartet.quartet.prelimSong }})
+          ({{ quartet.quartet.finalsSong }})
         </span>
       </mat-cell>
     </ng-container>
@@ -96,10 +95,4 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
   </mat-table>
-  <button mat-stroked-button (click)="save()" style="margin-top:10px;">
-    Save
-  </button>
-  <button mat-stroked-button (click)="toFinals()" style="margin-top:10px;">
-    To the Finals!
-  </button>
 </mat-card>

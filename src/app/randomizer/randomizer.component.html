@@ -2,6 +2,11 @@
   <mat-card-title>2019 Quartets</mat-card-title>
   <button mat-stroked-button (click)="randomize()">Randomize Quartets</button>
   <mat-table #table matSort [dataSource]="dataSource">
+    <ng-container matColumnDef="seq">
+      <mat-header-cell *matHeaderCellDef>#</mat-header-cell>
+      <mat-cell *matCellDef="let quartet"> {{ quartet.seq }} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="lead">
       <mat-header-cell *matHeaderCellDef>Lead</mat-header-cell>
       <mat-cell *matCellDef="let quartet"> {{ quartet.lead.name }} </mat-cell>
@@ -22,6 +27,11 @@
       <mat-cell *matCellDef="let quartet"> {{ quartet.tenor.name }} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="songName">
+      <mat-header-cell *matHeaderCellDef>Song</mat-header-cell>
+      <mat-cell *matCellDef="let quartet"> {{ quartet.prelimSong }} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell *matCellDef="let quartet">
@@ -31,8 +41,20 @@
             placeholder="Quartet Name"
             [value]="quartet.name"
             [(ngModel)]="quartet.name"
+            (ngModelChange)="change(quartets)"
           />
         </mat-form-field>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="finals">
+      <mat-header-cell *matHeaderCellDef>Finals</mat-header-cell>
+      <mat-cell *matCellDef="let quartet">
+        <mat-checkbox
+          [(ngModel)]="quartet.finals"
+          [checked]="quartet.finals"
+          (ngModelChange)="change(quartets)"
+        ></mat-checkbox>
       </mat-cell>
     </ng-container>
 
@@ -47,12 +69,50 @@
   >
     Save
   </button>
-  <button
+  <!-- <button
     mat-stroked-button
     (click)="submit()"
     style="margin-top:10px;"
     *ngIf="quartets.length > 0"
   >
     Submit to Scoring
+  </button> -->
+  <button mat-stroked-button (click)="generateCSV()" style="margin-top:10px;">
+    Generate Scoring File
+  </button>
+  <button
+    mat-stroked-button
+    (click)="randomPart('Lead')"
+    style="margin-top:10px;"
+  >
+    Random Lead
+  </button>
+  <button
+    mat-stroked-button
+    (click)="randomPart('Bass')"
+    style="margin-top:10px;"
+  >
+    Random Bass
+  </button>
+  <button
+    mat-stroked-button
+    (click)="randomPart('Bari')"
+    style="margin-top:10px;"
+  >
+    Random Bari
+  </button>
+  <button
+    mat-stroked-button
+    (click)="randomPart('Tenor')"
+    style="margin-top:10px;"
+  >
+    Random Tenor
+  </button>
+  <button
+    mat-stroked-button
+    (click)="generateFinals()"
+    style="margin-top:10px;"
+  >
+    Generate Finals!
   </button>
 </mat-card>
