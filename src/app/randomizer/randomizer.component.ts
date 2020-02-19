@@ -31,18 +31,18 @@ export class RandomizerComponent implements OnInit {
     "finals"
   ];
   public songs = [
-    "Between You and the Birds and the Bees and Cupid",
-    "Come Follow the Band",
-    "Mary Won't Marry Me",
-    "Angel Eyes",
-    "Change the World",
-    "Lazy Day",
-    "Lullabye",
-    "Good Luck Charm",
-    "Moonlight Becomes You",
-    "It's a Pity to Say Good Night",
-    "Rock It For Me",
-    "Ride the Chariot"
+    "I'm Walkin'",
+    "Everything's Coming Up Roses",
+    "In The Wee Small Hours of the Morning",
+    "Royal Garden Blues",
+    "Sentimental Gentleman from Georgia",
+    "Love Me and the World is Mine",
+    "Puttin' On The Ritz",
+    "Put Your Head On My Shoulder",
+    "(Let's Start) Tomorrow Tonight",
+    "(I Love You) For Sentimental Reasons",
+    "Get Happy",
+    "Jazz Me Blues"
   ];
   public modelChanged: Subject<Quartet[]> = new Subject<Quartet[]>();
 
@@ -270,4 +270,3 @@ export class RandomizerComponent implements OnInit {
 }
 
 // TODO1: Generate Finals List
-// TODO2: Single randoms
