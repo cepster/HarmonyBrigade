@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-title>
-    <div>2019 Roster</div>
+    <div>2020 Roster</div>
     <div>{{ people.length }} people</div>
     <div>
       {{ competingPeople().length }} competing: {{ partCount("Lead") }} Leads |
@@ -59,7 +59,7 @@
 
     <ng-container matColumnDef="noShow">
       <mat-header-cell *matHeaderCellDef mat-sort-header>
-        No Show</mat-header-cell
+        Exclude From Randomization</mat-header-cell
       >
       <mat-cell *matCellDef="let person">
         <mat-checkbox
