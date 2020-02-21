@@ -24,7 +24,15 @@ export class RosterComponent implements OnInit {
 
   public async ngOnInit() {
     this.data.getRoster().subscribe((people: Person[]) => {
-      this.people = people;
+      this.people = people.sort((p1, p2) => {
+        if (p1.name.split(" ")[1] < p2.name.split(" ")[1]) {
+          return -1;
+        } else if (p2.name.split(" ")[1] < p1.name.split(" ")[1]) {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
       this.dataSource = new MatTableDataSource(this.people);
 
       this.modelChanged.pipe(debounceTime(2000)).subscribe(model => {
